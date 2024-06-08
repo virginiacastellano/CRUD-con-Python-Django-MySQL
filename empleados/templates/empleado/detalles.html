@@ -1,0 +1,69 @@
+{% extends '../base.html' %}
+<!---->
+{% block title %}Detalles del Empleado{% endblock %}
+<!---->
+{% load static %}
+<!---->
+{% block content %}
+
+<div class="row justify-content-md-center">
+  <a
+    title="volver"
+    style="float: left; font-size: 25px"
+    href="{% url 'listar_empleados' %}">
+    <span><i class="bi bi-arrow-left-circle"></i></span>
+  </a>
+  <div class="col-md-5 mb-2">
+    <div class="card shadow">
+      {% load static %} {% if empleado.foto_empleado %}
+      <!-- Cargar la imagen del empleado si está disponible -->
+      {% if empleado.es_extension_valida %}
+      <!-- Comprobar si la extensión de la imagen es válida -->
+      <img
+        class="foto_empleado"
+        src="{{ empleado.foto_empleado.url }}"
+        alt="Foto de {{ empleado.nombre_empleado }}"
+        width="150" />
+      {% else %}
+      <!-- Si la extensión de la imagen no es válida, cargar una imagen predeterminada -->
+      <img
+        class="foto_empleado"
+        src="{% static 'imgs/empleado_defaul.jpg'%}"
+        alt="Sin foto"
+        width="150" />
+      {% endif %} {% endif %}
+
+      <div class="card-body">
+        <!-- Mostrar detalles del empleado -->
+        <p class="card-title">
+          <strong>Nombre del Empleado:</strong> {{ empleado.nombre_empleado }}
+        </p>
+        <p class="card-text buttom mb-3">
+          <strong>Apellido del Empleado: </strong>
+          {{ empleado.apellido_empleado }}
+        </p>
+        <p class="card-text buttom mb-3">
+          <strong>Edad del Empleado:</strong> {{ empleado.edad_empleado }} Años
+        </p>
+        <p class="card-text buttom mb-3">
+          <strong> Genero del Empleado:</strong> {{ empleado.genero_empleado }}
+        </p>
+        <p class="card-text buttom mb-3">
+          <strong>Email del Empleado:</strong> {{ empleado.email_empleado }}
+        </p>
+        <p class="card-text buttom mb-3">
+          <strong>Salario del Empleado:</strong> {{ empleado.salario_empleado }}
+        </p>
+        <p class="card-text">{{ empleado.created_at|date:"M d, Y" }}</p>
+
+        <hr />
+
+        <!-- Botón para volver a la lista de empleados -->
+        <a class="mt-5" href="{% url 'listar_empleados' %}">
+          <i class="bi bi-arrow-left-circle"> Volver</i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% if messages %}
+  <!-- Comprobar si hay mensajes para mostrar -->
+  
+  {% for message in messages %}
+    <!-- Iterar a través de cada mensaje en la variable de contexto 'messages' -->
+    
+    <div
+      class="alert alert-{{ message.tags }} alert-dismissible fade show text-center"
+      role="alert">
+      <!-- Caja de alerta con clase dinámica basada en las etiquetas del mensaje -->
+      
+      {{ message }}.
+      <!-- Mostrar el contenido del mensaje -->
+      
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"></button>
+      <!-- Botón para cerrar la alerta -->
+    </div>
+  {% endfor %}
+  
+{% endif %}

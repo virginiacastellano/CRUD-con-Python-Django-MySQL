@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+<!---->
+{% block title %}Carga masiva de Empleados{% endblock %}
+<!---->
+{% load static %} 
+{% block customCSS %}
+<!-- Cargar archivos de estilo personalizados -->
+<link rel="stylesheet" href="{% static 'css/custom_file.css' %}" />
+<link rel="stylesheet" href="{% static 'css/loading.css' %}" />
+{% endblock %}
+<!---->
+
+{% block content %}
+<!-- Contenido principal -->
+<div class="contentLoading" style="display: none">
+  <!-- Contenedor de carga oculto inicialmente -->
+  <div class="loading-overlay">
+    <!-- Superposición de carga -->
+    <span class="loader"></span>
+    <!-- Ícono de carga -->
+    <aside>Cargando, por favor espere ...</aside>
+    <!-- Mensaje de carga -->
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <!-- Fila centrada -->
+  <span id="respuesta"></span>
+  <!-- Respuesta del servidor -->
+
+  <div class="col-md-12 mb-2">
+    <!-- Columna de tamaño medio -->
+    <h1 class="text-center text-uppercase">
+      <!-- Título centrado -->
+      <a style="float: left" href="{% url 'inicio' %}">
+        <!-- Enlace de retorno -->
+        <span><i class="bi bi-arrow-left-circle"></i></span>
+      </a>
+
+      CARGA MASIVA DE EMPLEADOS
+      <!-- Título de la página -->
+      <a
+        style="color: #14ad47; float: right; padding: 0px 10px 0px 0px"
+        href="{% url 'view_form_carga_masiva' %}">
+        <!-- Enlace para cargar empleados manualmente -->
+        <i class="bi bi-person-fill-up"></i>
+      </a>
+      <hr />
+      <!-- Línea horizontal -->
+    </h1>
+  </div>
+</div>
+
+<div class="row justify-content-md-center">
+  <!-- Fila centrada para el formulario -->
+  <form
+    name="formXLSX"
+    id="formXLSX"
+    method="post"
+    enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="col-md-12" style="display: flex; justify-content: center">
+      <!-- Columna de tamaño medio para el botón de selección de archivo -->
+      <label class="input-file">
+        <!-- Etiqueta para el botón de selección de archivo -->
+        <b class="btn btn-primary file">
+          <!-- Botón de archivo -->
+          <i class="bi bi-file-earmark-excel"></i>
+          Selecciona un archivo XLSX
+          <!-- Texto del botón -->
+        </b>
+        <input
+          type="file"
+          name="archivo_xlsx"
+          id="archivo_xlsx"
+          class="fileInput verde"
+          accept=".xlsx" />
+        <!-- Input de tipo archivo -->
+      </label>
+    </div>
+
+    <div class="d-grid gap-2 col-6 mx-auto mt-5">
+      <!-- Botón de carga de datos -->
+      <button class="btn btn-primary verde" type="submit">
+        <!-- Botón de tipo submit -->
+        Cargar Data
+        <!-- Texto del botón -->
+        <i class="bi bi-file-earmark-spreadsheet"></i>
+        <!-- Icono de archivo de hoja de cálculo -->
+      </button>
+    </div>
+  </form>
+</div>
+
+{% endblock %}
+<!---->
+{% block customJS %}
+<!-- Cargar archivos JS personalizados -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="{% static 'js/custom_file.js' %}"></script>
+<script src="{% static 'js/process_carga_masiva.js' %}"></script>
+{% endblock %}

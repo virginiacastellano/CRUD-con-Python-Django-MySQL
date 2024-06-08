@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+<!---->
+{% block title %}Registrar Empleado{% endblock %}
+<!---->
+{% block content %}
+<!-- Contenido principal -->
+<div class="row justify-content-center">
+  <!-- Fila centrada -->
+  <div class="col-md-12 mb-2">
+    <!-- Columna de tamaño medio -->
+    <h1 class="text-center text-uppercase">
+      <!-- Título centrado -->
+      Datos del Empleado
+      <!-- Título -->
+      <a
+        style="color: #14ad47; float: right; padding: 0px 10px 0px 0px"
+        href="{% url 'view_form_carga_masiva' %}">
+        <!-- Enlace para cargar empleados manualmente -->
+        <i class="bi bi-person-fill-up"></i>
+        <!-- Icono -->
+      </a>
+      <hr />
+      <!-- Línea horizontal -->
+    </h1>
+  </div>
+</div>
+
+<div class="row justify-content-md-center">
+  <!-- Fila centrada para el formulario -->
+  <form
+    name="form_empleado"
+    method="POST"
+    action="{% url 'registrar_empleado' %}"
+    class="row justify-content-md-center g-3"
+    enctype="multipart/form-data">
+    <!-- Formulario para registrar empleado -->
+    {% csrf_token %}
+    <!-- Token CSRF para seguridad -->
+    <div class="col-md-5">
+      <label for="nombre_empleado" class="form-label">
+        Nombre del Empleado
+      </label>
+      <!-- Campo para el nombre del empleado -->
+      <input type="text" name="nombre_empleado" class="form-control" required />
+      <!-- Input de tipo texto -->
+    </div>
+    <div class="col-md-5">
+      <label for="apellido_empleado" class="form-label">
+        Apellido del Empleado
+      </label>
+      <!-- Campo para el apellido del empleado -->
+      <input
+        type="text"
+        name="apellido_empleado"
+        class="form-control"
+        required />
+      <!-- Input de tipo texto -->
+    </div>
+    <div class="col-md-5">
+      <label for="email_empleado" class="form-label">
+        Email del Empleado
+      </label>
+      <!-- Campo para el email del empleado -->
+      <input type="text" name="email_empleado" class="form-control" required />
+      <!-- Input de tipo texto -->
+    </div>
+    <div class="col-md-5">
+      <label for="edad_empleado" class="form-label"> Edad del Empleado </label>
+      <!-- Campo para la edad del empleado -->
+      <select name="edad_empleado" class="form-select" required>
+        <!-- Select para elegir la edad -->
+        {% for edad, edad_text in opciones_edad %}
+        <!-- Iterar sobre las opciones de edad -->
+        <option value="{{ edad }}">{{ edad_text }}</option>
+        <!-- Opción de edad -->
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-md-5">
+      <label for="genero_empleado">Genero del Empleado</label>
+      <!-- Campo para el género del empleado -->
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="genero_empleado"
+          id="Masculino"
+          value="Masculino"
+          checked />
+        <!-- Radio button para el género masculino -->
+        <label class="form-check-label" for="Masculino"> Masculino </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="genero_empleado"
+          value="Femenino"
+          id="Femenino" />
+        <!-- Radio button para el género femenino -->
+        <label class="form-check-label" for="Femenino"> Femenino </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="genero_empleado"
+          value="Otro"
+          id="Otro" />
+        <!-- Radio button para otro género -->
+        <label class="form-check-label" for="Otro"> Otro </label>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <label for="salario_empleado" class="form-label">
+        Salario del Empleado
+      </label>
+      <!-- Campo para el salario del empleado -->
+      <input
+        type="text"
+        name="salario_empleado"
+        class="form-control"
+        required />
+      <!-- Input de tipo texto -->
+    </div>
+
+    <div class="col-md-5">
+      <label for="" class="form-label"> Cargar foto del Empleado </label>
+      <!-- Campo para cargar la foto del empleado -->
+      <input
+        type="file"
+        name="foto_empleado"
+        class="form-control form-control-sm"
+        required />
+      <!-- Input de tipo archivo -->
+    </div>
+    <div class="col-md-5"></div>
+
+    <div class="d-grid gap-2 col-8 mx-auto mt-5">
+      <!-- Botón de registro de empleado -->
+      <button class="btn btn-primary" type="submit">
+        <!-- Botón de tipo submit -->
+        Registrar Empleado
+        <!-- Texto del botón -->
+        <i class="bi bi-arrow-clockwise"></i>
+        <!-- Icono -->
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}
